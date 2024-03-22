@@ -2,6 +2,8 @@ from typing import Callable
 import matplotlib.pyplot as plt
 import cmath
 
+TOLERANCE = 1e-6
+
 def plot_function(x_vals, y_vals, mid=None):
     
     plt.plot(x_vals, y_vals, label='f(x)')
@@ -14,10 +16,10 @@ def plot_function(x_vals, y_vals, mid=None):
     pass
 
 def Bisection(interval, f: Callable, cur_iter=0):
-    tolerance = 1e-6
+
     iterations = 0
     a, b = interval[0], interval[1]
-    while abs((b - a) / 2) > tolerance:
+    while abs((b - a) / 2) > TOLERANCE:
         iterations += 1
         midpoint = (a + b) / 2
         if f(midpoint) == 0:
@@ -35,11 +37,11 @@ def find_secant_root(x0, x1, f:Callable):
 
 def secant_method(x0, x1, f: Callable):
     N = 100
-    tolerance = 1e-6
+
     val = float('inf')
     iterations = 0
 
-    while val > tolerance and iterations < N:
+    while val > TOLERANCE and iterations < N:
 
         x2 = find_secant_root(x0, x1, f)
 
@@ -56,10 +58,9 @@ def false_position(x0, x1, f:Callable):
     if f(x0) * f(x1) > 0: 
         return None, 0
     
-    tolerance = 1e-6
     val = float('inf')
     iterations = 0
-    while (val > tolerance):
+    while (val > TOLERANCE):
         x2 = find_secant_root(x0, x1 ,f)
         if f(x2) * f(x0) < 0 :
             x1 = x2
@@ -72,11 +73,10 @@ def false_position(x0, x1, f:Callable):
     return x2, iterations
 
 def mullers_method(x0, x1, x2, f:Callable):
-    tolerance = 1e-6
-    iterations = 0
 
-    while abs(f(x2))  > tolerance:
-        iterations += 1
+
+    while abs(f(x2))  > TOLERANCE:
+        
         q = (x2 - x1)/(x1 - x0)
         a = q* f(x2) - q*(1+q)*f(x1) + q**2 * f(x0)
         b = (2*q+1)* f(x2) - (1+q)**2 *f(x1) + q**2 * f(x0)
@@ -94,4 +94,26 @@ def mullers_method(x0, x1, x2, f:Callable):
 
         x2, x1, x0 = x3, x2, x1
 
-    return x3, iterations
+    return x3
+
+def fixed_point_iteration(x, g: Callable, f:Callable):
+
+    
+    while abs(f(x)) > TOLERANCE:
+        # print(x)
+        x = g(x)
+        
+    return x
+
+
+def newtons_method(x, f:Callable, f_prime:Callable):
+
+    while abs(f(x)) > TOLERANCE:
+        slope = f_prime(x)
+        value = f(x)
+        b = value - slope * x
+        x = -1*b / slope
+
+    return x
+
+

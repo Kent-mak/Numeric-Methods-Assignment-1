@@ -1,7 +1,7 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
-from Methods import Bisection
+from Methods import Bisection, plot_function
 
 def f(x):
     return x * np.sin((x-2)/(x-1))
@@ -27,5 +27,10 @@ def sol(intervals):
     for i in range(4):
         print(f'{round(roots[i][0], 5)}, {roots[i][1]} iterations')
         
-
+def driver():
+    x = np.linspace(0.9, 1, 400)
+    y = f(x)
+    plot_function(x, y, 0.95)
+    intervals = find_intervals(x, y)
+    sol(intervals)
 

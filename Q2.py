@@ -1,6 +1,6 @@
 
 from Q1 import f
-from Methods import secant_method
+from Methods import secant_method, plot_function
 import numpy as np
 
 
@@ -32,6 +32,11 @@ def sol():
             count += 1
         i+=1
 
+def driver():
+    x = np.linspace(0.9, 1, 400)
+    y = f(x)
+    plot_function(x, y, 0.95)
+    sol()
 
     
 

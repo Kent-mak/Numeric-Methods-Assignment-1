@@ -1,7 +1,5 @@
 import argparse
-import Q1, Q2
-import Methods
-import numpy as np
+import Q1, Q2, Q3, Q4, Q5, Q6
 
 def parse_args():
     parser = argparse.ArgumentParser(description='argument settings')
@@ -15,55 +13,20 @@ def main(args):
     question = args.Q
     match question:
         case 1:
-            x = np.linspace(0.9, 1, 400)
-            y = Q1.f(x)
-            Methods.plot_function(x, y, 0.95)
-            intervals = Q1.find_intervals(x, y)
-            Q1.sol(intervals)
+            Q1.driver()
             
         case 2:
-            x = np.linspace(0.9, 1, 400)
-            y = Q1.f(x)
-            Methods.plot_function(x, y, 0.95)
-            Q2.sol()
+            Q2.driver()
 
         case 3:
-            p = lambda x : (x - 2)**3 * (x-4)**2
-            x = np.linspace(1, 5, 400)
-            y = p(x)
-            Methods.plot_function(x, y)
-            method = input("Which Method: ")
-            if method == 'a':
-                root, iterations = Methods.Bisection((1, 5), p)
-                print(f'Bisection root:{root}, {iterations} iterations')
-            elif method == 'b':
-                root, iterations = Methods.secant_method(1, 5, p)
-                print(f'Secant Method root:{root}, {iterations} iterations')
-            else:
-                root, iterations = Methods.false_position(1, 5, p)
-                print(f'False Position root:{root}, {iterations} iterations')
+            Q3.driver()
 
         case 4:
-            sub = input("sub problem: ")
-            if sub == 'a':
-                f = lambda x : 4*x**3 - 3*x**2 + 2*x - 1
-                x = np.linspace(0.4, 0.7, 400)
-                y = f(x)
-                Methods.plot_function(x, y, 0.6)
-                root, iterations = Methods.mullers_method(0.5, 0.6, 0.7, f)
-                print(f'Muller\'s Method root:{root}, {iterations} iterations')
-            else:
-                f = lambda x : x**2 + np.exp(x) - 5
-                x = np.linspace(-3, 2, 400)
-                y = f(x)
-                Methods.plot_function(x, y)
-                root1, iterations1 = Methods.mullers_method(-3, -2, -1, f)
-                root2, iterations2 = Methods.mullers_method(0, 1, 2, f)
-                print(f'Muller\'s Method roots:{root1},{root2}')
+            Q4.driver()
         case 5:
-            pass
+            Q5.driver()
         case 6:
-            pass
+            Q6.driver()
         case _:
             print('invalid input')
 
