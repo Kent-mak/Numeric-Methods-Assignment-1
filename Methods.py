@@ -15,20 +15,21 @@ def plot_function(x_vals, y_vals, mid=None):
     plt.show()
     pass
 
-def Bisection(interval, f: Callable, cur_iter=0):
-
+def Bisection(interval, f: Callable):
     iterations = 0
     a, b = interval[0], interval[1]
-    while abs((b - a) / 2) > TOLERANCE:
+    val = float('inf')
+    while val > TOLERANCE:
         iterations += 1
         midpoint = (a + b) / 2
-        if f(midpoint) == 0:
-            return midpoint  
-        elif f(a) * f(midpoint) < 0:
+        val = abs(f(midpoint))
+        # print(f'{midpoint}, {val}')
+        if f(a) * f(midpoint) < 0:
             b = midpoint
         else:
             a = midpoint
-    return (a + b) / 2, iterations
+    
+    return midpoint, iterations
 
 
 def find_secant_root(x0, x1, f:Callable):

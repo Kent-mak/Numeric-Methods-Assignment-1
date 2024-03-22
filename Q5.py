@@ -21,8 +21,8 @@ def driver():
             root1_2 = fixed_point_iteration(2.5, g_neg, f)
             root2_2 = fixed_point_iteration(2.7, g_neg, f)
 
-            print(f'x0 = 2.5, pos:{root1} neg:{root1_2}')
-            print(f'x0 = 2.7, pos:{root2} neg:{root2_2}')
+            print(f'x0 = 2.5, positive value:{root1} negative value:{root1_2}')
+            print(f'x0 = 2.7, positive value:{root2} negative value:{root2_2}')
         case 'c':
             root = fixed_point_iteration(2.5, gc, f)
             print(f'root: {root}')
